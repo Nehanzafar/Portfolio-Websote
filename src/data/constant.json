@@ -1,0 +1,25 @@
+{
+
+        "logoText": "Nehan • Zafar",
+        "nav": [
+            "Home",
+            "About",
+            "Projects",
+            "Contact"
+        ],
+        "socials":
+        {
+            "instagram": {"name": "Nehanzafar", "href": "#", "icon": "instagram"},
+
+            "linkedin": {"name": "Nehanzafar", "href": "#", "icon": "linkedin"}
+
+        },
+        "footer":{
+            "ContactText": "Get in Touch",
+            "ContactBtn": "Contact Now",
+            "copyright": "Nehan Zafar",
+            "privacy": {"text": "Privacy Policy", "href": "#"},
+            "terms": {"text": "Terms & Condition", "href": "#"}
+        }
+    
+}

@@ -1,4 +1,8 @@
-@import "tailwindcss";
+@layer theme, base, mui, components, utilities;
+@import 'tailwindcss';
+
+@config "./tailwind.config.ts";
+
 
 @custom-variant dark (&:where(.dark, .dark *));
 
@@ -8,6 +12,22 @@
   --color-accent-yellow: #FCA311;
   --color-accent-pink: #EA526F;
   --color-deep-rose: #B9314F;
+  --color-dark-gray: #333333;
+
 }
 
+@layer base {
+  * {
+    font-family: Montserrat;
+    box-sizing: border-box;
 
+  }
+
+  body {
+    @apply bg-dark-green overflow-x-hidden
+  }
+}
+
+.lucide {
+  color: var(--color-accent-yellow);
+}
