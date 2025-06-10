@@ -9,11 +9,17 @@ const Header = () => {
   const [navOpen, setNavOpen] = React.useState(false);
   function handleClick() {
     setNavOpen(!navOpen);
-    navOpen ? disableBodyScroll(document) : enableBodyScroll(document);
+    if (navOpen){
+      enableBodyScroll(document.body)
+    }
+    else{
+      disableBodyScroll(document.body)
+    }
+    // navOpen ? disableBodyScroll(document.body) : enableBodyScroll(document.body);
   }
 
   return (
-    <div className="flex flex-row justify-between items-center w-full h-24 p-6">
+    <header className="flex flex-row justify-between items-center w-full h-24 md:p-6 p-2 backdrop-blur-md">
       <Link to={"/"}>
         <h1 className="text-white text-2xl">
           <span>{constant.logoText.slice(0, 5)}</span>
@@ -63,7 +69,7 @@ const Header = () => {
           </ul>
         </nav>
       </div>
-    </div>
+    </header>
   );
 };
 

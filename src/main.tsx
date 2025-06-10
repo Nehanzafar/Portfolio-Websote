@@ -4,10 +4,10 @@ import "./styles/index.css";
 import { createBrowserRouter, RouterProvider } from "react-router";
 import ErrorElement from "./routes/ErrorElement.js";
 import Root from "./routes/root.js";
-// import { CacheProvider } from "@emotion/react";
 import { StyledEngineProvider } from "@mui/material/styles";
 import GlobalStyles from "@mui/material/GlobalStyles";
-import Home from "./routes/Home.tsx"
+import Home from "./routes/Home.tsx";
+
 
 const rootElement = document.getElementById("root");
 
@@ -20,8 +20,8 @@ const routes = createBrowserRouter(
       children: [
         {
           index: true,
-          element: <Home/>,
-        }
+          element: <Home />,
+        },
       ],
     },
   ],
@@ -31,7 +31,8 @@ const routes = createBrowserRouter(
 createRoot(rootElement!).render(
   <StrictMode>
     <StyledEngineProvider enableCssLayer>
-      <GlobalStyles styles="@layer theme, base, mui, components, utilities;>" />
+      <GlobalStyles styles="@layer theme, base, mui, components, utilities;" />
+
       <RouterProvider router={routes}></RouterProvider>
     </StyledEngineProvider>
   </StrictMode>

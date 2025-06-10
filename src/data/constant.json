@@ -17,7 +17,7 @@
         "footer":{
             "ContactText": "Get in Touch",
             "ContactBtn": "Contact Now",
-            "copyright": "Nehan Zafar",
+        "copyright": "Nehan Zafar",
             "privacy": {"text": "Privacy Policy", "href": "#"},
             "terms": {"text": "Terms & Condition", "href": "#"}
         }

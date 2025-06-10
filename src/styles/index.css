@@ -4,6 +4,7 @@
 @config "./tailwind.config.ts";
 
 
+
 @custom-variant dark (&:where(.dark, .dark *));
 
 @theme {
