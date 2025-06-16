@@ -4,8 +4,16 @@ import constant from "../data/constant.json";
 import Root from "../routes/root";
 import type { navJson } from "./portfolio-website.d.ts";
 import Components from "../utils/staticImports.tsx";
+import type { ReactNode } from "react";
 
-function createRoutesFromJSON(obj: navJson, routeElements): RouteObject {
+interface componentObj {
+  [name: string]: () => ReactNode;
+}
+
+function createRoutesFromJSON(
+  obj: navJson,
+  routeElements: componentObj
+): RouteObject {
   if (obj.isIndex) {
     const Elem = routeElements[obj.name];
     const tmp = {
@@ -27,7 +35,6 @@ function createRoutesFromJSON(obj: navJson, routeElements): RouteObject {
     return tmp;
   }
 }
-
 
 const childrenRoutes = constant.nav.map((obj: navJson) => {
   return createRoutesFromJSON(obj, Components);

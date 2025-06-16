@@ -13,14 +13,17 @@ interface props extends componentProps {
   [content: string]: unknown;
 }
 
-type eventObj = { target: React.ReactNode };
+// type eventObj = { target: React.ReactNode };
 
 const Li = ({ children, className = "" }: props) => {
   return <li className={`${className} text-accent-yellow `}>{children}</li>;
 };
 
 const SocialIconList = () => {
-  const [curOpenBtn, setCurOpenBtn] = React.useState();
+  const [curOpenBtn, setCurOpenBtn] = React.useState() as [
+    number,
+    (arg0: number) => number
+  ];
   return (
     <ul className="flex justify-center z-1">
       {Object.keys(constant.socials).map((key, index) => {

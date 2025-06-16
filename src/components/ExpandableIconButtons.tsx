@@ -5,8 +5,8 @@ import type { componentProps } from "../utils/portfolio-website";
 interface props extends componentProps {
   text?: string;
   href?: string;
-  state?: React.SetStateAction<number>;
-  id?: number;
+  state: [number, (arg0: number) => number];
+  id: number;
 }
 
 const ExpandableIconButtons = ({
@@ -27,7 +27,6 @@ const ExpandableIconButtons = ({
   React.useEffect(() => {
     if (id !== curOpen) {
       setOpen(false);
-      
     }
   }, [curOpen, id]);
 
