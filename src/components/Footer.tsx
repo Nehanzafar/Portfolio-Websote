@@ -1,29 +1,55 @@
-import constant from "../data/constant.json";
-import { Link } from "react-router";
-import ExpandableIconButtons from "./ExpandableIconButtons";
-import Icon from "../components/Icons";
+import React, { Fragment } from "react";
 import { Typography } from "@mui/material";
-import ParallaxTextbg from "./ParallaxTextbg";
 import Button from "@mui/material/Button";
-import type { componentProps } from "../utils/portfolio-website";
+import { Link } from "react-router-dom";
+import Icon from "../components/Icons";
+import constant from "../data/constant.json";
+import type { componentProps, navJson } from "../utils/portfolio-website";
+import ExpandableIconButtons from "./ExpandableIconButtons";
+import ParallaxTextbg from "./ParallaxTextbg";
 
-interface props extends componentProps{
-  [content: string]: unknown
+interface props extends componentProps {
+  onClick?: () => void | ((key: string) => void);
+  [content: string]: unknown;
 }
 
-
+type eventObj = { target: React.ReactNode };
 
 const Li = ({ children, className = "" }: props) => {
   return <li className={`${className} text-accent-yellow `}>{children}</li>;
 };
 
+const SocialIconList = () => {
+  const [curOpenBtn, setCurOpenBtn] = React.useState();
+  return (
+    <ul className="flex justify-center z-1">
+      {Object.keys(constant.socials).map((key, index) => {
+        /* @ts-expect-error Implentation of the JSON's data types is pending*/
+        const value = constant.socials[key];
+        return (
+          <li key={key} className="mx-2 my-3">
+            <ExpandableIconButtons
+              id={index}
+              className={"bg-accent-yellow hover:bg-amber-700"}
+              text={value.name}
+              href={value.href}
+              state={[curOpenBtn, setCurOpenBtn]}
+            >
+              <Icon name={value.icon} color="#fff" />
+            </ExpandableIconButtons>
+          </li>
+        );
+      })}
+    </ul>
+  );
+};
+
 const Footer = () => {
   const date = new Date();
 
-
   return (
-    <footer className="w-full flex flex-col ">
-      <div className="w-full flex flex-col md:my-4 my-1">
+    <footer className="w-full ">
+      <div className="w-full flex flex-col md:my-4 my-1 -z-10">
         <ParallaxTextbg className="self-end">
           {constant.footer.ContactText.toLocaleUpperCase()}
         </ParallaxTextbg>
@@ -37,42 +63,34 @@ const Footer = () => {
           {constant.footer.ContactBtn}
         </Button>
       </div>
-      <ul className="flex justify-around self-center m-5">
-        {constant.nav.map((item, i) => {
+      <ul className="flex justify-around self-center mx-auto my-3 lg:w-1/3 w-82">
+        {constant.nav.map((item: navJson, i: number) => {
           if (i == 0 || i == constant.nav.length) {
-            return (
-              <Li key={item}>
-                <Link to={"/" + item.toLowerCase()}>{item}</Link>
+            return item.isIndex ? (
+              <Li key={item.name}>
+                <Link to={"/"}>{item.name}</Link>
+              </Li>
+            ) : (
+              <Li key={item.name}>
+                <Link to={"/" + item.name.toLowerCase()}>{item.name}</Link>
               </Li>
             );
           } else {
             return (
-              <Li key={item}>
-                <span className="mx-4">&#x2022;</span>
-                <Link to={"/" + item.toLowerCase()}>{item}</Link>
-              </Li>
+              <Fragment key={item.name}>
+                <Li key={item.name + " dot"}>
+                  <span className="mx-4 text-accent-yellow">&#x2022;</span>
+                </Li>
+                <Li key={item.name}>
+                  <Link to={"/" + item.name.toLowerCase()}>{item.name}</Link>
+                </Li>
+              </Fragment>
             );
           }
         })}
       </ul>
-      <div className="bg-[#fff1dbFF] h-32 block flex-col justify-between w-full relative">
-        <ul className="flex justify-center">
-          {Object.keys(constant.socials).map((key) => {
-            {/* @ts-expect-error Implentation of the JSON's data types is pending*/}
-            const value = constant.socials[key];
-            return (
-              <li key={key} className="mx-2 my-3">
-                <ExpandableIconButtons
-                  className={"bg-accent-yellow hover:bg-amber-700"}
-                  text={value.name}
-                  href={value.href}
-                >
-                  <Icon name={value.icon} color="#fff" />
-                </ExpandableIconButtons>
-              </li>
-            );
-          })}
-        </ul>
+      <div className="bg-[#fff1dbFF] h-32 block flex-col justify-between w-full relative z-1">
+        <SocialIconList />
         <div className="absolute bottom-0 flex w-full justify-between">
           <Typography variant="caption" className="inline-block">
             {date.getFullYear()} — {constant.footer.copyright}
